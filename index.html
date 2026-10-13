@@ -49,6 +49,20 @@
   .brand { display: inline-flex; align-items: center; gap: .55em; text-decoration: none; font-family: var(--v-font-display); font-weight: 700; font-size: 1.5rem; letter-spacing: .01em; line-height: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .brand i { width: .62em; height: .62em; background: var(--v-accent); clip-path: polygon(50% 0, 100% 100%, 0 100%); flex: none; }
   .bar .v-btn { padding: .65em 1.1em; font-size: var(--v-t-sm); }
+  .nav { display: flex; gap: clamp(1rem, 2.4vw, 2.2rem); margin-inline: auto; }
+  .v-page .nav a { text-decoration: none; font-size: var(--v-t-sm); font-weight: 500; color: var(--v-ink); padding: .5rem 0; position: relative; white-space: nowrap; }
+  .nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: .25rem; height: 2px; background: var(--v-accent); transform: scaleX(0); transform-origin: left; transition: transform .18s var(--v-ease-out); }
+  @media (hover: hover) and (pointer: fine) { .nav a:hover::after { transform: scaleX(1); } }
+  .nav a:focus-visible::after { transform: scaleX(1); }
+  [id] { scroll-margin-top: 4.5rem; }
+  @media (max-width: 860px) {
+    .bar { flex-wrap: wrap; row-gap: 0; padding-bottom: 0; }
+    .nav { order: 3; flex: 1 0 100%; margin: 0 calc(var(--v-gutter) * -1); padding: 0 var(--v-gutter); overflow-x: auto; scrollbar-width: none; gap: 1.4rem; }
+    .nav::-webkit-scrollbar { display: none; }
+    [id] { scroll-margin-top: 6.5rem; }
+    .hero__copy { top: 7rem !important; }
+    .steps__title { top: 7.2rem !important; }
+  }
 
   /* ---- 1. первый экран: межа обходит участок ----------------------------- */
   .hero [data-v-stage] { background: #c5d1cb; }
@@ -206,6 +220,12 @@
 
 <header class="bar">
   <a class="brand" href="#top"><i></i>{{компания}}</a>
+  <nav class="nav" aria-label="Разделы сайта">
+    <a href="#uchastki">Участки</a>
+    <a href="#raspolozhenie">Расположение</a>
+    <a href="#kak-kupit">Как купить</a>
+    <a href="#rieltor">Риелтор</a>
+  </nav>
   <a class="v-btn" href="#podborka">Получить подборку участков</a>
 </header>
 
@@ -422,7 +442,7 @@
         <p class="form__status" id="lead-status" role="status" aria-live="polite"></p>
       </form>
     </div>
-    <footer class="foot"><span>{{компания}} · земельные участки в Сочи</span><span>Фото на сайте – иллюстрации района</span></footer>
+    <footer class="foot"><span>© 2026 {{компания}} · земельные участки в Сочи</span><span>Фото на сайте – иллюстрации района</span></footer>
   </div>
 </section>
 
