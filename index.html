@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow" data-publish>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{компания}} · земельные участки в Сочи</title>
+<meta name="description" content="Земельные участки в {{район}}, Сочи: площадь, назначение земли, коммуникации, подъезд и цена по каждому участку. Документы можно запросить до показа.">
+<meta property="og:title" content="Земельные участки в {{район}}, Сочи">
+<meta property="og:description" content="Площадь, назначение земли, коммуникации, подъезд и цена по каждому участку. Документы – до показа.">
+<meta property="og:image" content="assets/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@600;700;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M16 3 28 29H4z%27 fill=%27%23e8570f%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="vibe.css">
+<style>
+  /* ---- тема: известняк, хвоя, межевой колышек ---------------------------- */
+  .v-page {
+    --v-canvas: #e9ece6; --v-surface: #f6f7f3;
+    --v-ink: #14211d; --v-ink-soft: #55645d;
+    --v-accent: #e8570f; --v-accent-ink: #160d06;
+    --v-spruce: #12261f; --v-spruce-2: #1b3329;
+    --v-font-display: "Alumni Sans", "Arial Narrow", system-ui, sans-serif;
+    --v-font-text: "Golos Text", "Segoe UI", system-ui, sans-serif;
+    --v-shadow-color: 20 33 29;
+    --v-e1: 0 1px 2px rgb(var(--v-shadow-color) / .1), 0 8px 22px rgb(var(--v-shadow-color) / .1);
+    --v-e2: 0 2px 6px rgb(var(--v-shadow-color) / .12), 0 22px 56px rgb(var(--v-shadow-color) / .2);
+    --v-radius: 4px;
+    --v-measure: 56ch;
+    --v-section: clamp(4rem, 9vw, 8rem);
+    transition: none;
+  }
+  .v-page .v-display { font-weight: 700; letter-spacing: -.005em; line-height: .94; }
+  .v-page h1.v-display { font-size: clamp(3rem, 1.4rem + 5.2vw, 6.2rem); line-height: .9; }
+  .v-page h2.v-display { font-size: clamp(2.6rem, 1.5rem + 3.8vw, 5rem); }
+  .v-page .v-btn { border-radius: 3px; box-shadow: none; font-weight: 600; padding: 1em 1.5em; }
+  .v-page a.v-btn { color: var(--v-accent-ink); }
+  .v-page .v-btn:hover { box-shadow: var(--v-e1); }
+  .v-page .v-btn:focus-visible { outline-color: var(--v-ink); }
+  .v-page img { content-visibility: auto; }
+  .v-page dl, .v-page dd, .v-page ol { margin: 0; padding: 0; }
+  .v-page .on-dark { --v-ink: #eaeee8; --v-ink-soft: #b0c0b7; --v-hair: rgb(234 238 232 / .16); --v-hair-strong: rgb(234 238 232 / .3); color: var(--v-ink); }
+
+  /* ---- верхняя полоса: имя и единственная кнопка ------------------------- */
+  .bar { position: fixed; z-index: 30; inset: 0 0 auto 0; display: flex; align-items: center; justify-content: space-between; gap: var(--v-4);
+    padding: .55rem var(--v-gutter); background: color-mix(in oklab, var(--v-canvas) 86%, transparent); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--v-hair); }
+  .brand { display: inline-flex; align-items: center; gap: .55em; text-decoration: none; font-family: var(--v-font-display); font-weight: 700; font-size: 1.5rem; letter-spacing: .01em; line-height: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .brand i { width: .62em; height: .62em; background: var(--v-accent); clip-path: polygon(50% 0, 100% 100%, 0 100%); flex: none; }
+  .bar .v-btn { padding: .65em 1.1em; font-size: var(--v-t-sm); }
+
+  /* ---- 1. первый экран: межа обходит участок ----------------------------- */
+  .hero [data-v-stage] { background: #c5d1cb; }
+  .hero__bg img { position: absolute; max-width: none; width: 112%; height: 112%; left: -6%; top: -6%; object-fit: cover; object-position: 58% 60%; content-visibility: visible; }
+  .hero__scrim { position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: linear-gradient(to right, rgb(233 236 230 / .9) 0%, rgb(233 236 230 / .6) 30%, rgb(233 236 230 / 0) 56%),
+                linear-gradient(to top, rgb(233 236 230 / .5) 0%, rgb(233 236 230 / 0) 26%); }
+  .hero__copy { z-index: 4; max-width: min(44rem, 92vw); bottom: clamp(3rem, 11vh, 7rem); }
+  .hero__copy h1 { max-width: 14ch; }
+  .hero__copy .v-lede { margin-top: var(--v-5); max-width: 36ch; color: var(--v-ink); }
+  .hero__copy .v-btn { margin-top: var(--v-6); }
+  .hero__plot { z-index: 3; }
+  .plotmap { position: absolute; right: calc(var(--v-gutter) + 1vw); top: 14vh; width: min(44vw, 40rem); aspect-ratio: 600 / 440; }
+  .plotmap svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .plotmap .halo, .plotmap .line { fill: none; stroke-linejoin: round; stroke-dasharray: 1 1; stroke-dashoffset: max(0, calc(.65 - var(--v-p, 0) * 1.3)); }
+  .plotmap .halo { stroke: rgb(255 255 255 / .75); stroke-width: 11; }
+  .plotmap .line { stroke: var(--v-accent); stroke-width: 5; }
+  .plotmap .area { fill: var(--v-accent); fill-opacity: clamp(0, calc(var(--v-p, 0) * .5), .22); }
+  .plotmap .stake { fill: var(--v-accent); stroke: #fff; stroke-width: 3; }
+  .plotmap__tag { white-space: nowrap; position: absolute; left: 46%; top: 3%; background: var(--v-surface); border-radius: var(--v-radius); box-shadow: var(--v-e2); padding: .6rem .85rem .65rem; line-height: 1.1; }
+  .plotmap__tag b { display: block; font-family: var(--v-font-display); font-size: 1.9rem; font-weight: 700; line-height: 1; }
+  .plotmap__tag span { display: block; margin-top: .25rem; font-size: var(--v-t-xs); color: var(--v-ink-soft); }
+  @media (max-width: 860px) {
+    .hero__scrim { background: linear-gradient(to bottom, rgb(233 236 230 / .94) 0%, rgb(233 236 230 / .8) 34%, rgb(233 236 230 / 0) 58%); }
+    .hero__bg img { object-position: 62% 60%; }
+    .plotmap { width: 78vw; right: 4vw; top: auto; bottom: 5vh; }
+    .plotmap__tag { left: 3%; top: auto; bottom: 100%; margin-bottom: -.6rem; }
+    .hero__copy { left: var(--v-gutter); right: var(--v-gutter); top: 4.6rem; bottom: auto; max-width: none; }
+    .hero__copy h1 { max-width: 13ch; }
+    .hero__copy .v-lede { font-size: var(--v-t-base); }
+    .hero__copy .v-btn { margin-top: var(--v-5); }
+  }
+
+  /* ---- 2. что проверяем: страх – ответ ------------------------------------ */
+  .risks { padding-top: calc(var(--v-section) * .6); }
+  .risks__grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  .v-page .risks__head > * + * { margin-top: var(--v-5); }
+  .risks__list { border-top: 1px solid var(--v-hair-strong); }
+  .risks__list li { display: grid; grid-template-columns: minmax(0, 15rem) 1fr; gap: var(--v-5); padding-block: var(--v-5); border-bottom: 1px solid var(--v-hair-strong); }
+  .risks__list h3 { margin: 0; font-family: var(--v-font-display); font-weight: 700; font-size: 1.9rem; line-height: 1; color: var(--v-ink); text-wrap: balance; }
+  .risks__list p { color: var(--v-ink-soft); max-width: 44ch; text-wrap: pretty; align-self: center; }
+  @media (max-width: 860px) {
+    .risks__grid { grid-template-columns: 1fr; }
+    .risks__list li { grid-template-columns: 1fr; gap: var(--v-2); }
+  }
+
+  /* ---- 3. участки: боковая лента ------------------------------------------- */
+  .plots { background: var(--v-spruce); }
+  .plots [data-v-stage] { display: flex; align-items: center; background: var(--v-spruce); }
+  .plots__rail { align-items: center; padding-inline: var(--v-gutter) calc(var(--v-gutter) * 2); gap: clamp(1rem, 2.5vw, 2rem); }
+  .plots__intro { flex: none; width: min(26rem, 84vw); }
+  .v-page .plots__intro > * + * { margin-top: var(--v-5); }
+  .plots__intro .v-lede { color: var(--v-ink); max-width: 28ch; }
+  .plot { flex: none; width: min(23rem, 80vw); background: var(--v-surface); color: #14211d; border-radius: var(--v-radius); box-shadow: var(--v-e2); overflow: hidden; display: flex; flex-direction: column; }
+  .plot__shape { position: relative; aspect-ratio: 16 / 9; background: #dfe5de; border-bottom: 1px solid rgb(20 33 29 / .14); }
+  .plot__shape svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .plot__shape .c { fill: none; stroke: rgb(20 33 29 / .1); stroke-width: 1; }
+  .plot__shape .p { fill: rgb(232 87 15 / .16); stroke: #14211d; stroke-width: 2; stroke-linejoin: round; }
+  .plot__shape circle { fill: var(--v-accent); stroke: #f6f7f3; stroke-width: 2; }
+  .plot__body { padding: var(--v-5) var(--v-5) var(--v-5); }
+  .plot__body h3 { margin: 0 0 var(--v-4); font-family: var(--v-font-display); font-weight: 700; font-size: 2.2rem; line-height: 1; color: #14211d; }
+  .plot dl > div { display: flex; justify-content: space-between; gap: var(--v-4); padding-block: .55rem; border-top: 1px solid rgb(20 33 29 / .14); font-size: var(--v-t-sm); }
+  .plot dt { color: #55645d; flex: none; }
+  .plot dd { text-align: right; font-weight: 500; }
+  .plot dl > div.is-price dd { font-weight: 600; }
+  .plot--cta { background: var(--v-accent); color: var(--v-accent-ink); justify-content: space-between; padding: var(--v-6); min-height: 24rem; box-shadow: none; }
+  .plot--cta h3 { font-family: var(--v-font-display); font-weight: 700; line-height: .95; color: var(--v-accent-ink); font-size: clamp(2.6rem, 2rem + 2vw, 3.6rem); margin: 0; }
+  .v-page .plot--cta p { max-width: 24ch; margin-top: var(--v-4); }
+  .plot--cta .v-btn { background: var(--v-spruce); color: #eaeee8; align-self: flex-start; margin-top: var(--v-6); }
+  .v-page .plot--cta a.v-btn { color: #eaeee8; }
+  .plot--cta .v-btn:focus-visible { outline-color: var(--v-spruce); }
+
+  /* ---- 4. расположение ---------------------------------------------------- */
+  .loc__grid { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+  .loc__fig { border-radius: var(--v-radius); overflow: hidden; box-shadow: var(--v-e2); aspect-ratio: 4 / 3; background: #c5d1cb; }
+  .loc__fig img { width: 100%; height: 100%; object-fit: cover; }
+  .loc__cap { margin-top: var(--v-3); font-size: var(--v-t-xs); color: var(--v-ink-soft); }
+  .v-page .loc__text > * + * { margin-top: var(--v-5); }
+  .v-page .facts { border-top: 1px solid var(--v-hair-strong); margin-top: var(--v-6) !important; }
+  .facts > div { display: flex; justify-content: space-between; gap: var(--v-4); padding-block: .8rem; border-bottom: 1px solid var(--v-hair); }
+  .facts dt { color: var(--v-ink-soft); }
+  .facts dd { text-align: right; font-weight: 500; }
+  @media (max-width: 860px) { .loc__grid { grid-template-columns: 1fr; } }
+
+  /* ---- 5. как купить: межевая линия с колышками --------------------------- */
+  .steps [data-v-stage] { background: var(--v-spruce); }
+  .steps__bg img { position: absolute; max-width: none; width: 112%; height: 112%; left: -6%; top: -6%; object-fit: cover; object-position: 50% 55%; content-visibility: visible; }
+  .steps__scrim { position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: linear-gradient(to right, rgb(10 24 19 / .88) 0%, rgb(10 24 19 / .62) 34%, rgb(10 24 19 / 0) 62%); }
+  .steps__title { position: absolute; z-index: 4; left: var(--v-gutter); top: clamp(5rem, 14vh, 8rem); }
+  .steps__copy { position: absolute; z-index: 4; left: var(--v-gutter); bottom: clamp(3rem, 12vh, 8rem); width: min(32rem, 88vw); display: grid; }
+  .step { grid-area: 1 / 1; }
+  .step h3 { margin: 0; font-family: var(--v-font-display); font-weight: 700; font-size: clamp(2.8rem, 2rem + 3vw, 4.6rem); line-height: .92; }
+  .step h3 span { color: var(--v-accent); margin-right: .25em; }
+  .step p { margin-top: var(--v-4); max-width: 38ch; color: var(--v-ink); text-wrap: pretty; }
+  .steps__line { position: absolute; z-index: 4; right: calc(var(--v-gutter) + 1vw); top: 18vh; bottom: 14vh; width: 1px; background: rgb(234 238 232 / .3); }
+  .steps__fill { position: absolute; inset: 0; background: var(--v-accent); transform-origin: top; transform: scaleY(clamp(0, calc(var(--v-p, 0) * 1.15), 1)); }
+  .steps__stake { position: absolute; right: 0; width: 0; height: 0; font-style: normal; }
+  .steps__stake b { position: absolute; left: -6.5px; top: -6.5px; width: 13px; height: 13px; background: var(--v-spruce); border: 1px solid rgb(234 238 232 / .6); transform: rotate(45deg); transition: background-color .3s var(--v-ease-out), border-color .3s var(--v-ease-out), transform .3s var(--v-ease-out); }
+  .steps__stake.is-on b { background: var(--v-accent); border-color: var(--v-accent); transform: rotate(45deg) scale(1.2); }
+  .steps__stake span { position: absolute; right: 1.2rem; top: 0; transform: translateY(-50%); white-space: nowrap; font-size: var(--v-t-sm); color: var(--v-ink-soft); transition: color .3s var(--v-ease-out); }
+  .steps__stake.is-on span { color: var(--v-ink); }
+  @media (max-width: 860px) {
+    .steps__scrim { background: linear-gradient(to top, rgb(10 24 19 / .94) 0%, rgb(10 24 19 / .7) 46%, rgb(10 24 19 / .1) 78%); }
+    .steps__line { top: 14vh; bottom: auto; height: 22vh; right: var(--v-gutter); }
+    .steps__stake span { display: none; }
+    .steps__title { top: 5rem; }
+  }
+
+  /* ---- 6. риелтор --------------------------------------------------------- */
+  .agent__grid { display: grid; grid-template-columns: minmax(0, 17rem) 1fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+  .agent__photo { aspect-ratio: 3 / 4; border-radius: var(--v-radius); background:
+      repeating-linear-gradient(135deg, rgb(20 33 29 / .07) 0 1px, transparent 1px 12px), var(--v-surface);
+    box-shadow: inset 0 0 0 1px var(--v-hair-strong); display: grid; place-items: center; text-align: center; padding: var(--v-4); color: var(--v-ink-soft); font-size: var(--v-t-sm); }
+  .v-page .agent__text > * + * { margin-top: var(--v-5); }
+  @media (max-width: 700px) { .agent__grid { grid-template-columns: 1fr; } .agent__photo { max-width: 14rem; } }
+
+  /* ---- 7. форма ----------------------------------------------------------- */
+  .final { background: var(--v-spruce); position: relative; overflow: hidden; }
+  .final__bg { position: absolute; inset: 0; }
+  .final__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+  .final__bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, rgb(18 38 31 / .94) 0%, rgb(18 38 31 / .8) 45%, rgb(18 38 31 / .45) 100%); }
+  .final .v-wrap { position: relative; z-index: 2; }
+  .final__grid { display: grid; grid-template-columns: 5fr 6fr; gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  .v-page .final__head > * + * { margin-top: var(--v-5); }
+  .v-page .contacts { margin-top: var(--v-7) !important; border-top: 1px solid var(--v-hair-strong); }
+  .contacts > div { display: flex; justify-content: space-between; gap: var(--v-4); padding-block: .7rem; border-bottom: 1px solid var(--v-hair); font-size: var(--v-t-sm); }
+  .contacts dt { color: var(--v-ink-soft); }
+  .contacts dd { text-align: right; }
+  .form { background: rgb(8 20 15 / .62); backdrop-filter: blur(6px); border-radius: var(--v-radius); box-shadow: var(--v-e2), inset 0 1px 0 rgb(234 238 232 / .12); padding: clamp(1.25rem, 3vw, 2.25rem); display: grid; gap: var(--v-5); }
+  .field { display: grid; gap: .4rem; }
+  .field label { font-size: var(--v-t-sm); color: var(--v-ink-soft); }
+  .field input, .field select, .field textarea { width: 100%; font: inherit; color: var(--v-ink); background: rgb(234 238 232 / .08); border: 1px solid var(--v-hair-strong); border-radius: 3px; padding: .8em .9em; min-height: 3rem; }
+  .field select option { color: #14211d; }
+  .field textarea { min-height: 5.5rem; resize: vertical; }
+  .field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--v-accent); outline-offset: 1px; border-color: var(--v-accent); }
+  .field ::placeholder { color: rgb(176 192 183 / .7); }
+  .consent { display: flex; gap: .7rem; align-items: flex-start; font-size: var(--v-t-xs); color: var(--v-ink-soft); line-height: 1.45; }
+  .consent input { margin-top: .15rem; accent-color: var(--v-accent); width: 1.1rem; height: 1.1rem; flex: none; }
+  .v-page button.v-btn { background: var(--v-accent); color: var(--v-accent-ink); border-radius: 3px; justify-content: center; }
+  .form__status { min-height: 1.2em; font-size: var(--v-t-sm); color: var(--v-ink); }
+  .foot { position: relative; z-index: 2; margin-top: var(--v-9); padding-top: var(--v-5); border-top: 1px solid var(--v-hair); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--v-3) var(--v-6); font-size: var(--v-t-xs); color: var(--v-ink-soft); }
+  .foot a { color: inherit; }
+  @media (max-width: 860px) { .final__grid { grid-template-columns: 1fr; } .final__bg::after { background: rgb(18 38 31 / .86); } }
+
+  @media (max-width: 520px) {
+    .brand { font-size: 1.25rem; }
+    .bar .v-btn { font-size: .78rem; padding: .6em .85em; }
+  }
+</style>
+</head>
+<body>
+<div class="v-page">
+<div data-v-progress></div>
+
+<header class="bar">
+  <a class="brand" href="#top"><i></i>{{компания}}</a>
+  <a class="v-btn" href="#podborka">Получить подборку участков</a>
+</header>
+
+<main id="top">
+
+<!-- 1. Первый экран: межа обходит участок. pin, три плана (фото, контур, реплика) -->
+<section class="hero" data-v-act="pin" data-v-span="2.6">
+  <div data-v-stage>
+    <div class="v-layer hero__bg" data-v-parallax="-0.5"><img src="assets/hero.webp" alt="Склон холма с кипарисами над морем в районе Сочи" width="1920" height="1080" fetchpriority="high"></div>
+    <div class="hero__scrim"></div>
+    <div class="v-layer hero__plot" data-v-parallax="-1">
+      <div class="plotmap" aria-hidden="true">
+        <svg viewBox="0 0 600 440">
+          <path class="area" d="M60 310 L140 100 L340 50 L530 140 L560 330 L300 395 Z"/>
+          <path class="halo" pathLength="1" d="M60 310 L140 100 L340 50 L530 140 L560 330 L300 395 Z"/>
+          <path class="line" pathLength="1" d="M60 310 L140 100 L340 50 L530 140 L560 330 L300 395 Z"/>
+          <circle class="stake" cx="60" cy="310" r="9"/>
+          <circle class="stake" cx="140" cy="100" r="9" style="opacity:clamp(0,calc((.35 + var(--v-p,0)*1.3 - .166)*12),1)"/>
+          <circle class="stake" cx="340" cy="50" r="9" style="opacity:clamp(0,calc((.35 + var(--v-p,0)*1.3 - .318)*12),1)"/>
+          <circle class="stake" cx="530" cy="140" r="9" style="opacity:clamp(0,calc((.35 + var(--v-p,0)*1.3 - .473)*12),1)"/>
+          <circle class="stake" cx="560" cy="330" r="9" style="opacity:clamp(0,calc((.35 + var(--v-p,0)*1.3 - .615)*12),1)"/>
+          <circle class="stake" cx="300" cy="395" r="9" style="opacity:clamp(0,calc((.35 + var(--v-p,0)*1.3 - .813)*12),1)"/>
+        </svg>
+        <div class="plotmap__tag"><b>{{площадь}} сот.</b><span>{{назначение земли}}</span></div>
+      </div>
+    </div>
+    <div class="v-copy v-copy--lead hero__copy" data-v-cue="0 1 0 0">
+      <h1 class="v-display v-display--xl">Участки в {{район}}, Сочи – документы до показа</h1>
+      <p class="v-lede">Площадь, назначение земли, коммуникации, подъезд и цена – по каждому участку, до звонка.</p>
+      <a class="v-btn" href="#podborka">Получить подборку участков</a>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Что проверяем: страх – ответ. flow + in -->
+<section class="v-section risks" data-v-act="flow" id="proverka">
+  <div class="v-wrap risks__grid">
+    <div class="risks__head" data-v-in>
+      <h2 class="v-display">Участок красивый. А строить на нём можно?</h2>
+      <p class="v-body v-soft">Четыре вопроса, которые покупатель задаёт ещё до первого звонка. Ответы на них стоят в карточке участка, а не «по запросу».</p>
+    </div>
+    <ul class="risks__list" data-v-in data-v-stagger="80">
+      <li><h3>Не та категория земли</h3><p>Назначение земли и вид разрешённого использования указаны в карточке участка.</p></li>
+      <li><h3>Нет подъезда и коммуникаций</h3><p>Подъезд и коммуникации названы по каждому участку: что есть на границе, а чего нет.</p></li>
+      <li><h3>Спор по документам</h3><p>Документы по участку можно запросить до показа и спокойно прочитать вдвоём.</p></li>
+      <li><h3>Цена только по звонку</h3><p>Цена стоит в карточке рядом с площадью. Разговор начинается с фактов.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 3. Участки: боковая лента. pan -->
+<section class="plots on-dark" data-v-act="pan" data-v-span="4.2" id="uchastki">
+  <div data-v-stage>
+    <div class="plots__rail" data-v-pan="0.1">
+      <div class="plots__intro">
+        <h2 class="v-display">Участки в {{район}}</h2>
+        <p class="v-lede">Каждый – с площадью, назначением земли, коммуникациями, подъездом и ценой.</p>
+      </div>
+
+      <article class="plot">
+        <div class="plot__shape" aria-hidden="true">
+          <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><path class="c" d="M-10 150 C60 110 120 140 180 100 S290 60 340 90"/><path class="c" d="M-10 170 C70 130 130 160 190 122 S290 84 340 112"/><path class="c" d="M-10 130 C50 90 110 120 170 78 S280 36 340 68"/>
+            <path class="p" d="M70 128 L96 50 L196 34 L262 76 L236 140 L140 150 Z"/>
+            <circle cx="70" cy="128" r="5"/><circle cx="96" cy="50" r="5"/><circle cx="196" cy="34" r="5"/><circle cx="262" cy="76" r="5"/><circle cx="236" cy="140" r="5"/><circle cx="140" cy="150" r="5"/></svg>
+        </div>
+        <div class="plot__body">
+          <h3>Участок {{номер}}</h3>
+          <dl>
+            <div><dt>Площадь</dt><dd>{{площадь}} сот.</dd></div>
+            <div><dt>Назначение земли</dt><dd>{{назначение земли}}</dd></div>
+            <div><dt>Коммуникации</dt><dd>{{коммуникации}}</dd></div>
+            <div><dt>Подъезд</dt><dd>{{подъезд}}</dd></div>
+            <div class="is-price"><dt>Цена</dt><dd>{{цена}}</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="plot">
+        <div class="plot__shape" aria-hidden="true">
+          <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><path class="c" d="M-10 60 C70 100 140 60 200 110 S290 140 340 110"/><path class="c" d="M-10 84 C70 124 140 84 200 134 S290 164 340 134"/><path class="c" d="M-10 36 C70 76 140 36 200 86 S290 116 340 86"/>
+            <path class="p" d="M60 70 L150 38 L250 52 L268 118 L170 146 L84 130 Z"/>
+            <circle cx="60" cy="70" r="5"/><circle cx="150" cy="38" r="5"/><circle cx="250" cy="52" r="5"/><circle cx="268" cy="118" r="5"/><circle cx="170" cy="146" r="5"/><circle cx="84" cy="130" r="5"/></svg>
+        </div>
+        <div class="plot__body">
+          <h3>Участок {{номер}}</h3>
+          <dl>
+            <div><dt>Площадь</dt><dd>{{площадь}} сот.</dd></div>
+            <div><dt>Назначение земли</dt><dd>{{назначение земли}}</dd></div>
+            <div><dt>Коммуникации</dt><dd>{{коммуникации}}</dd></div>
+            <div><dt>Подъезд</dt><dd>{{подъезд}}</dd></div>
+            <div class="is-price"><dt>Цена</dt><dd>{{цена}}</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="plot">
+        <div class="plot__shape" aria-hidden="true">
+          <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><path class="c" d="M-10 110 C60 70 130 120 200 70 S290 40 340 70"/><path class="c" d="M-10 134 C60 94 130 144 200 94 S290 64 340 94"/><path class="c" d="M-10 86 C60 46 130 96 200 46 S290 16 340 46"/>
+            <path class="p" d="M96 140 L70 80 L128 36 L230 44 L276 104 L206 150 Z"/>
+            <circle cx="96" cy="140" r="5"/><circle cx="70" cy="80" r="5"/><circle cx="128" cy="36" r="5"/><circle cx="230" cy="44" r="5"/><circle cx="276" cy="104" r="5"/><circle cx="206" cy="150" r="5"/></svg>
+        </div>
+        <div class="plot__body">
+          <h3>Участок {{номер}}</h3>
+          <dl>
+            <div><dt>Площадь</dt><dd>{{площадь}} сот.</dd></div>
+            <div><dt>Назначение земли</dt><dd>{{назначение земли}}</dd></div>
+            <div><dt>Коммуникации</dt><dd>{{коммуникации}}</dd></div>
+            <div><dt>Подъезд</dt><dd>{{подъезд}}</dd></div>
+            <div class="is-price"><dt>Цена</dt><dd>{{цена}}</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="plot plot--cta">
+        <div>
+          <h3>Нужен другой район или площадь?</h3>
+          <p>Пришлём участки, которые подходят вам, с теми же фактами и ценой.</p>
+        </div>
+        <a class="v-btn" href="#podborka">Получить подборку участков</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Расположение. flow, шторка, in -->
+<section class="v-section loc" data-v-act="flow" id="raspolozhenie">
+  <div class="v-wrap loc__grid">
+    <div>
+      <figure class="loc__fig" data-v-reveal="left" data-v-reveal-at="0.08 0.4"><img src="assets/location.webp" alt="Прибрежная дорога среди зелёных склонов над морем" width="1400" height="1050" loading="lazy"></figure>
+      <p class="loc__cap">Иллюстрация района. Карта района и расположение участков – {{карта}}.</p>
+    </div>
+    <div class="loc__text" data-v-in data-v-stagger="80">
+      <h2 class="v-display">Где участок и что рядом</h2>
+      <p class="v-body v-soft">Район и расстояния – фактами, а не словами «рядом с морем». Точные данные по каждому участку – в его карточке.</p>
+      <dl class="facts">
+        <div><dt>До моря</dt><dd>{{расстояние до моря}}</dd></div>
+        <div><dt>До центра Сочи</dt><dd>{{расстояние до центра}}</dd></div>
+        <div><dt>Дорога к участку</dt><dd>{{дорога}}</dd></div>
+        <div><dt>Рядом</dt><dd>{{что рядом}}</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Как купить: межевая линия, четыре колышка. pin -->
+<section class="steps on-dark" data-v-act="pin" data-v-span="2.8" id="kak-kupit">
+  <div data-v-stage>
+    <div class="v-layer steps__bg" data-v-parallax="-0.4"><img src="assets/access.webp" alt="Деревянные межевые колышки с оранжевым шнуром на краю участка" width="1920" height="1080" loading="lazy"></div>
+    <div class="steps__scrim"></div>
+    <h2 class="v-display steps__title" data-v-cue="0 1 0 0">Как купить участок</h2>
+    <div class="steps__copy">
+      <div class="step" data-v-cue="0 0.27 0 0.05">
+        <h3><span>1</span>Просмотр</h3>
+        <p>Выбираете участки из подборки и записываетесь на показ. На месте смотрите границы, подъезд и окружение.</p>
+      </div>
+      <div class="step" data-v-cue="0.25 0.52 0.05 0.05">
+        <h3><span>2</span>Документы</h3>
+        <p>Запрашиваете документы по участку – можно до показа. Проверяете назначение земли и права на участок: {{документы}}.</p>
+      </div>
+      <div class="step" data-v-cue="0.5 0.77 0.05 0.05">
+        <h3><span>3</span>Договор</h3>
+        <p>Цена и условия записываются в договоре. Читаете его до подписания, вдвоём и без спешки.</p>
+      </div>
+      <div class="step" data-v-cue="0.75 1 0.05 0">
+        <h3><span>4</span>Сделка</h3>
+        <p>Подписываем договор и оформляем переход права на участок. Даты и условия: {{условия сделки}}.</p>
+      </div>
+    </div>
+    <div class="steps__line" aria-hidden="true">
+      <div class="steps__fill"></div>
+      <i class="steps__stake" style="top:0"><b></b><span>Просмотр</span></i>
+      <i class="steps__stake" style="top:33.3%"><b></b><span>Документы</span></i>
+      <i class="steps__stake" style="top:66.6%"><b></b><span>Договор</span></i>
+      <i class="steps__stake" style="top:100%"><b></b><span>Сделка</span></i>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Риелтор. flow + in -->
+<section class="v-section agent" data-v-act="flow" id="rieltor">
+  <div class="v-wrap agent__grid">
+    <div class="agent__photo" data-v-in-self data-v-in role="img" aria-label="Место для фото риелтора">Фото риелтора<br>{{фото}}</div>
+    <div class="agent__text" data-v-in data-v-stagger="80">
+      <h2 class="v-display">{{риелтор}}</h2>
+      <p class="v-lede" style="max-width:34ch">Подбирает земельные участки в Сочи и сопровождает покупку от показа до сделки.</p>
+      <p class="v-body v-soft">Опыт и специализация: {{опыт}}. Только факты, которые можно проверить.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Форма. flow -->
+<section class="v-section final on-dark" data-v-act="flow" id="podborka">
+  <div class="final__bg" aria-hidden="true"><img src="assets/evening.webp" alt="" width="1920" height="1080" loading="lazy"></div>
+  <div class="v-wrap">
+    <div class="final__grid">
+      <div class="final__head" data-v-in data-v-stagger="80">
+        <h2 class="v-display">Подборка участков под ваш запрос</h2>
+        <p class="v-lede" style="color:var(--v-ink)">Оставьте контакт – вернёмся с участками, у которых названы площадь, назначение земли, коммуникации, подъезд и цена.</p>
+        <dl class="contacts">
+          <div><dt>Телефон</dt><dd>{{телефон}}</dd></div>
+          <div><dt>Мессенджер</dt><dd>{{ссылка-записи}}</dd></div>
+          <div><dt>Часы</dt><dd>{{часы}}</dd></div>
+          <div><dt>Адрес</dt><dd>{{адрес}}</dd></div>
+        </dl>
+      </div>
+      <form class="form" id="lead" action="{{форма-заявки}}" method="post" data-v-in data-v-in-self>
+        <div class="field"><label for="f-name">Имя</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+        <div class="field"><label for="f-phone">Телефон</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7" required></div>
+        <div class="field"><label for="f-way">Как удобнее связаться</label>
+          <select id="f-way" name="way"><option>Позвонить</option><option>WhatsApp</option><option>Telegram</option></select></div>
+        <div class="field"><label for="f-wish">Что важно в участке (необязательно)</label><textarea id="f-wish" name="wish" placeholder="Район, площадь, бюджет"></textarea></div>
+        <label class="consent"><input type="checkbox" name="consent" required><span>Согласен на обработку персональных данных. <a href="{{ссылка-политика}}">Политика обработки данных</a></span></label>
+        <button class="v-btn" type="submit">Получить подборку участков</button>
+        <p class="form__status" id="lead-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <footer class="foot"><span>{{компания}} · земельные участки в Сочи</span><span>Фото на сайте – иллюстрации района</span></footer>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script src="vibe.js"></script>
+<script>
+  Vibe.mount(document.querySelector('.v-page'));
+
+  // Колышки на межевой линии «Как купить» загораются по ходу сцены.
+  (function () {
+    var act = document.getElementById('kak-kupit');
+    var stakes = Array.prototype.slice.call(act.querySelectorAll('.steps__stake'));
+    var live = false, last = -1;
+    function tick() {
+      var p = parseFloat(getComputedStyle(act).getPropertyValue('--v-p')) || 0;
+      var k = Math.min(3, Math.floor(p * 4 + 0.02));
+      if (k !== last) { last = k; stakes.forEach(function (s, i) { s.classList.toggle('is-on', i <= k); }); }
+      if (live) requestAnimationFrame(tick);
+    }
+    new IntersectionObserver(function (es) { live = es[0].isIntersecting; if (live) tick(); }).observe(act);
+    tick();
+  })();
+
+  // Форма: пока заказчик не назвал, куда слать заявки, ничего не отправляем и говорим об этом прямо.
+  (function () {
+    var form = document.getElementById('lead'), status = document.getElementById('lead-status');
+    form.addEventListener('submit', function (e) {
+      if (form.getAttribute('action').indexOf('{{') !== -1) {
+        e.preventDefault();
+        status.textContent = 'Это демо: форма ещё не подключена к приёму заявок. Данные никуда не отправлены.';
+      }
+    });
+  })();
+</script>
+</body>
+</html>
