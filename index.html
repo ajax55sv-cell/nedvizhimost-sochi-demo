@@ -64,9 +64,14 @@
     .steps__title { top: 7.2rem !important; }
   }
 
-  /* ---- 1. первый экран: межа обходит участок ----------------------------- */
+  /* ---- 1. первый экран: камера подъезжает к участку ---------------------- */
+  .hero { --mx: .66; --my: .68; }                   /* где на фото стоит метка участка (доли кадра) */
   .hero [data-v-stage] { background: #c5d1cb; }
-  .hero__bg img { position: absolute; max-width: none; width: 112%; height: 112%; left: -6%; top: -6%; object-fit: cover; object-position: 58% 60%; content-visibility: visible; }
+  /* «мир» - кадр 16:9 с запасом 12%, как object-fit: cover; фото и метка живут в одних координатах */
+  .hero__world { position: absolute; left: 50%; top: 50%; width: max(112vw, calc(112svh * 16 / 9)); aspect-ratio: 16 / 9; translate: -50% -50%; }
+  .hero__zoom { position: absolute; inset: 0; transform-origin: calc(var(--mx) * 100%) calc(var(--my) * 100%);
+    transform: scale(calc(1 + var(--v-p, 0) * .42)); will-change: transform; }
+  .hero__zoom img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; content-visibility: visible; }
   .hero__scrim { position: absolute; inset: 0; z-index: 2; pointer-events: none;
     background: linear-gradient(to right, rgb(233 236 230 / .9) 0%, rgb(233 236 230 / .6) 30%, rgb(233 236 230 / 0) 56%),
                 linear-gradient(to top, rgb(233 236 230 / .5) 0%, rgb(233 236 230 / 0) 26%); }
@@ -74,26 +79,56 @@
   .hero__copy h1 { max-width: 14ch; }
   .hero__copy .v-lede { margin-top: var(--v-5); max-width: 36ch; color: var(--v-ink); }
   .hero__copy .v-btn { margin-top: var(--v-6); }
-  .hero__plot { z-index: 3; }
-  .plotmap { position: absolute; right: calc(var(--v-gutter) + 1vw); top: 14vh; width: min(44vw, 40rem); aspect-ratio: 600 / 440; }
-  .plotmap svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .plotmap .halo, .plotmap .line { fill: none; stroke-linejoin: round; stroke-dasharray: 1 1; stroke-dashoffset: max(0, calc(.65 - var(--v-p, 0) * 1.3)); }
-  .plotmap .halo { stroke: rgb(255 255 255 / .75); stroke-width: 11; }
-  .plotmap .line { stroke: var(--v-accent); stroke-width: 5; }
-  .plotmap .area { fill: var(--v-accent); fill-opacity: clamp(0, calc(var(--v-p, 0) * .5), .22); }
-  .plotmap .stake { fill: var(--v-accent); stroke: #fff; stroke-width: 3; }
-  .plotmap__tag { white-space: nowrap; position: absolute; left: 46%; top: 3%; background: var(--v-surface); border-radius: var(--v-radius); box-shadow: var(--v-e2); padding: .6rem .85rem .65rem; line-height: 1.1; }
-  .plotmap__tag b { display: block; font-family: var(--v-font-display); font-size: 1.9rem; font-weight: 700; line-height: 1; }
-  .plotmap__tag span { display: block; margin-top: .25rem; font-size: var(--v-t-xs); color: var(--v-ink-soft); }
+  .hero__spot { z-index: 3; }
+  /* дымка расходится вокруг участка: фокус на метке, края светлеют */
+  .hero__fog { position: absolute; inset: -100%; pointer-events: none;
+    background: radial-gradient(circle at calc((1 + var(--mx)) / 3 * 100%) calc((1 + var(--my)) / 3 * 100%), rgb(233 236 230 / 0) 0, rgb(233 236 230 / 0) 11%, rgb(233 236 230 / .62) 24%);
+    opacity: clamp(0, calc(var(--v-p, 0) * 2.2), 1); }
+  .hero__mark { position: absolute; left: calc(var(--mx) * 100%); top: calc(var(--my) * 100%); width: 0; height: 0; }
+  .hero__mark i { position: absolute; left: -.55rem; top: -.55rem; width: 1.1rem; height: 1.1rem; border-radius: 50%; background: var(--v-accent); border: 3px solid #fff; box-shadow: 0 2px 10px rgb(0 0 0 / .3); }
+  .hero__mark::before, .hero__mark::after { content: ""; position: absolute; left: -1.6rem; top: -1.6rem; width: 3.2rem; height: 3.2rem; border-radius: 50%;
+    border: 2px solid var(--v-accent); opacity: 0; animation: hero-ping 2.6s ease-out infinite; }
+  .hero__mark::after { animation-delay: 1.3s; }
+  @keyframes hero-ping { 0% { transform: scale(.3); opacity: .9; } 100% { transform: scale(1.5); opacity: 0; } }
+  .hero__card { position: absolute; left: 0; top: 0; width: min(19.5rem, 62vw); translate: -50% calc(-100% - 1.7rem);
+    background: var(--v-surface); border-radius: var(--v-radius); box-shadow: var(--v-e2); padding: .85rem 1rem 1rem;
+    opacity: clamp(0, calc((var(--v-p, 0) - .04) * 12), 1); transform: translateY(calc((1 - clamp(0, calc((var(--v-p, 0) - .04) * 12), 1)) * 14px)); }
+  .hero__card::after { content: ""; position: absolute; left: 50%; bottom: -.45rem; width: .9rem; height: .9rem; background: var(--v-surface); transform: translateX(-50%) rotate(45deg); }
+  .hero__head { display: flex; align-items: baseline; justify-content: space-between; gap: .8rem; padding-bottom: .55rem; border-bottom: 1px solid rgb(0 0 0 / .12); }
+  .hero__head b { font-family: var(--v-font-display); font-size: 2rem; font-weight: 700; line-height: 1; white-space: nowrap; }
+  .hero__head span { font-size: var(--v-t-xs); color: var(--v-ink-soft); text-align: right; white-space: nowrap; }
+  .v-page .hero__list { list-style: none; margin: .55rem 0 0; padding: 0; display: grid; gap: .42rem; }
+  .v-page .hero__list li { position: relative; padding-left: 1.45rem; font-size: .9rem; line-height: 1.3;
+    opacity: clamp(0, calc((var(--v-p, 0) - var(--t)) * 16), 1); transform: translateX(calc((1 - clamp(0, calc((var(--v-p, 0) - var(--t)) * 16), 1)) * 10px)); }
+  .v-page .hero__list li::before { content: ""; position: absolute; left: .15rem; top: .22em; width: .38rem; height: .72rem; border: solid var(--v-accent); border-width: 0 3px 3px 0; transform: rotate(40deg); }
+  .v-page .hero__list li span { color: var(--v-ink-soft); }
+  .v-page .hero__price { margin: .65rem 0 0; font-family: var(--v-font-display); font-size: 1.5rem; font-weight: 700; line-height: 1;
+    opacity: clamp(0, calc((var(--v-p, 0) - .74) * 16), 1); }
   @media (max-width: 860px) {
     .hero__scrim { background: linear-gradient(to bottom, rgb(233 236 230 / .94) 0%, rgb(233 236 230 / .8) 34%, rgb(233 236 230 / 0) 58%); }
-    .hero__bg img { object-position: 62% 60%; }
-    .plotmap { width: 78vw; right: 4vw; top: auto; bottom: 5vh; }
-    .plotmap__tag { left: 3%; top: auto; bottom: 100%; margin-bottom: -.6rem; }
+    /* на телефоне метка по центру и ниже, карточка под ней: сверху остаётся место для заголовка */
+    .hero__world { left: 50%; top: 64%; translate: calc(var(--mx) * -100%) calc(var(--my) * -100%); }
+    .hero__card { translate: -50% 1.5rem; }
+    .hero__card::after { bottom: auto; top: -.45rem; }
+    .hero__card { padding: .6rem .8rem .7rem; width: min(17rem, 84vw); }
+    .hero__head { flex-wrap: wrap; row-gap: .1rem; padding-bottom: .4rem; }
+    .hero__head b { font-size: 1.5rem; }
+    .hero__head span { white-space: normal; text-align: left; }
+    .v-page .hero__list { margin-top: .4rem; gap: .28rem; }
+    .v-page .hero__list li { font-size: .8rem; line-height: 1.25; padding-left: 1.2rem; }
+    .v-page .hero__list li::before { width: .3rem; height: .58rem; border-width: 0 2.5px 2.5px 0; }
+    .v-page .hero__price { margin-top: .45rem; font-size: 1.25rem; }
     .hero__copy { left: var(--v-gutter); right: var(--v-gutter); top: 4.6rem; bottom: auto; max-width: none; }
     .hero__copy h1 { max-width: 13ch; }
     .hero__copy .v-lede { font-size: var(--v-t-base); }
     .hero__copy .v-btn { margin-top: var(--v-5); }
+  }
+  @media (max-width: 860px) and (max-height: 740px) { .hero__copy .v-lede { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__zoom { transform: none; }
+    .hero__fog { opacity: 0; }
+    .hero__card, .v-page .hero__list li, .v-page .hero__price { opacity: 1; transform: none; }
+    .hero__mark::before, .hero__mark::after { animation: none; }
   }
 
   /* ---- 2. что проверяем: страх – ответ ------------------------------------ */
@@ -145,7 +180,18 @@
   .facts > div { display: flex; justify-content: space-between; gap: var(--v-4); padding-block: .8rem; border-bottom: 1px solid var(--v-hair); }
   .facts dt { color: var(--v-ink-soft); }
   .facts dd { text-align: right; font-weight: 500; }
-  @media (max-width: 860px) { .loc__grid { grid-template-columns: 1fr; } }
+  /* живописные места рядом: два кадра одной высоты, широкий и узкий */
+  .scenic { margin-top: clamp(4rem, 9vw, 8rem); }
+  .scenic__title { max-width: 18ch; }
+  .scenic__grid { display: grid; grid-template-columns: 8fr 4fr; gap: clamp(1rem, 3vw, 2.5rem); align-items: start; margin-top: var(--v-6); }
+  .scenic figure { margin: 0; }
+  .scenic img { display: block; width: 100%; height: clamp(14rem, 30vw, 25rem); object-fit: cover; border-radius: var(--v-radius); box-shadow: var(--v-e2); background: #c5d1cb; }
+  .scenic figcaption { margin-top: var(--v-3); font-size: var(--v-t-xs); color: var(--v-ink-soft); }
+  @media (max-width: 860px) {
+    .loc__grid { grid-template-columns: 1fr; }
+    .scenic__grid { grid-template-columns: 1fr; }
+    .scenic img { height: auto; aspect-ratio: 3 / 2; }
+  }
 
   /* ---- 5. как купить: межевая линия с колышками --------------------------- */
   .steps [data-v-stage] { background: var(--v-spruce); }
@@ -231,25 +277,28 @@
 
 <main id="top">
 
-<!-- 1. Первый экран: межа обходит участок. pin, три плана (фото, контур, реплика) -->
+<!-- 1. Первый экран: камера подъезжает к участку, карточка с документами заполняется. pin, три плана (фото, метка, реплика) -->
 <section class="hero" data-v-act="pin" data-v-span="2.6">
   <div data-v-stage>
-    <div class="v-layer hero__bg" data-v-parallax="-0.5"><img src="assets/hero.webp" alt="Склон холма с кипарисами над морем в районе Сочи" width="1920" height="1080" fetchpriority="high"></div>
+    <div class="v-layer hero__bg" data-v-parallax="-0.5">
+      <div class="hero__world"><div class="hero__zoom"><img src="assets/hero.webp" alt="Ровная поляна на вершине холма над морем в районе Сочи, по краю подпорная стенка и въезд" width="1920" height="1080" fetchpriority="high"></div></div>
+    </div>
     <div class="hero__scrim"></div>
-    <div class="v-layer hero__plot" data-v-parallax="-1">
-      <div class="plotmap" aria-hidden="true">
-        <svg viewBox="0 0 600 440">
-          <path class="area" d="M60 310 L140 100 L340 50 L530 140 L560 330 L300 395 Z"/>
-          <path class="halo" pathLength="1" d="M60 310 L140 100 L340 50 L530 140 L560 330 L300 395 Z"/>
-          <path class="line" pathLength="1" d="M60 310 L140 100 L340 50 L530 140 L560 330 L300 395 Z"/>
-          <circle class="stake" cx="60" cy="310" r="9"/>
-          <circle class="stake" cx="140" cy="100" r="9" style="opacity:clamp(0,calc((.35 + var(--v-p,0)*1.3 - .166)*12),1)"/>
-          <circle class="stake" cx="340" cy="50" r="9" style="opacity:clamp(0,calc((.35 + var(--v-p,0)*1.3 - .318)*12),1)"/>
-          <circle class="stake" cx="530" cy="140" r="9" style="opacity:clamp(0,calc((.35 + var(--v-p,0)*1.3 - .473)*12),1)"/>
-          <circle class="stake" cx="560" cy="330" r="9" style="opacity:clamp(0,calc((.35 + var(--v-p,0)*1.3 - .615)*12),1)"/>
-          <circle class="stake" cx="300" cy="395" r="9" style="opacity:clamp(0,calc((.35 + var(--v-p,0)*1.3 - .813)*12),1)"/>
-        </svg>
-        <div class="plotmap__tag"><b>{{площадь}} сот.</b><span>{{назначение земли}}</span></div>
+    <div class="v-layer hero__spot" data-v-parallax="-0.5" aria-hidden="true">
+      <div class="hero__world">
+        <div class="hero__fog"></div>
+        <div class="hero__mark"><i></i>
+          <div class="hero__card">
+            <div class="hero__head"><b>{{площадь}} сот.</b><span>Участок №{{номер}}</span></div>
+            <ul class="hero__list">
+              <li style="--t:.14"><span>Назначение:</span> {{назначение земли}}</li>
+              <li style="--t:.26"><span>Коммуникации:</span> {{коммуникации}}</li>
+              <li style="--t:.38"><span>Подъезд:</span> {{подъезд}}</li>
+              <li style="--t:.50"><span>Документы:</span> {{документы}}</li>
+            </ul>
+            <p class="hero__price">{{цена}}</p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="v-copy v-copy--lead hero__copy" data-v-cue="0 1 0 0">
@@ -366,6 +415,20 @@
         <div><dt>Дорога к участку</dt><dd>{{дорога}}</dd></div>
         <div><dt>Рядом</dt><dd>{{что рядом}}</dd></div>
       </dl>
+    </div>
+  </div>
+
+  <div class="v-wrap scenic">
+    <h2 class="v-display scenic__title" data-v-in>Живописные места рядом</h2>
+    <div class="scenic__grid" data-v-in data-v-stagger="140">
+      <figure class="scenic__wide">
+        <img src="assets/scenic-slopes.webp" alt="Склон с кипарисами над морем в утреннем свете" width="1600" height="760" loading="lazy">
+        <figcaption>{{место 1}} – {{расстояние}} от участков</figcaption>
+      </figure>
+      <figure class="scenic__tall">
+        <img src="assets/scenic-terraces.webp" alt="Тропа по террасам среди кипарисов над морем" width="900" height="1125" loading="lazy">
+        <figcaption>{{место 2}} – {{расстояние}} от участков</figcaption>
+      </figure>
     </div>
   </div>
 </section>
