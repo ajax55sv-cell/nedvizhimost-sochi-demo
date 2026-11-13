@@ -260,6 +260,19 @@
     .bar .v-btn { font-size: .78rem; padding: .6em .85em; }
   }
 </style>
+<style>
+/* legal-add */
+.legal-links{margin-top:10px;font-size:13px;opacity:.8;hyphens:none}
+.legal-links a{color:inherit}
+.ckn{margin:8px 0 0;font-size:12px;line-height:1.45;opacity:.75;hyphens:none}
+.ckn a{color:inherit;text-decoration:underline}
+.ckb{position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;max-width:720px;margin:0 auto;padding:14px 16px;background:#fff;color:#1b1c22;border:1px solid #e7e8ee;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.18);font:400 14px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;hyphens:none;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.ckb p{margin:0;flex:1 1 280px}
+.ckb a{color:inherit;text-decoration:underline}
+.ckb__b{display:flex;gap:8px;flex-wrap:wrap}
+.ckb button{font:inherit;font-weight:600;padding:9px 14px;border-radius:8px;border:1px solid #1b1c22;background:#fff;color:#1b1c22;cursor:pointer}
+.ckb button[data-v="all"]{background:#1b1c22;color:#fff}
+</style>
 </head>
 <body>
 <div class="v-page">
@@ -500,12 +513,12 @@
         <div class="field"><label for="f-way">Как удобнее связаться</label>
           <select id="f-way" name="way"><option>Позвонить</option><option>WhatsApp</option><option>Telegram</option></select></div>
         <div class="field"><label for="f-wish">Что важно в участке (необязательно)</label><textarea id="f-wish" name="wish" placeholder="Район, площадь, бюджет"></textarea></div>
-        <label class="consent"><input type="checkbox" name="consent" required><span>Согласен на обработку персональных данных. <a href="#">Политика обработки данных</a></span></label>
+        <label class="consent"><input type="checkbox" name="consent" required><span>Согласен на <a href="soglasie.html">обработку персональных данных</a>. <a href="politika.html">Политика обработки данных</a></span></label>
         <button class="v-btn" type="submit">Получить подборку участков</button>
         <p class="form__status" id="lead-status" role="status" aria-live="polite"></p>
       </form>
     </div>
-    <footer class="foot"><span>© 2026 Участки у моря · земельные участки в Сочи</span><span>Демонстрационный сайт: участки, цены и контакты условные. Фото – иллюстрации района</span></footer>
+    <footer class="foot"><span>© 2026 Участки у моря · земельные участки в Сочи</span><span>Демонстрационный сайт: участки, цены и контакты условные. Фото – иллюстрации района</span><p class="legal-links"><a href="politika.html">Политика обработки персональных данных</a> · <a href="soglasie.html">Согласие на обработку данных</a></p></footer>
   </div>
 </section>
 
@@ -542,5 +555,13 @@
     });
   })();
 </script>
+<script>
+(function(){var K='cookie-choice';try{if(localStorage.getItem(K))return}catch(e){}
+var b=document.createElement('div');b.className='ckb';b.setAttribute('role','dialog');b.setAttribute('aria-label','Файлы cookie');
+b.innerHTML='<p>Сайт использует файлы cookie: необходимые для работы и, если вы согласны, для статистики. <a href="politika.html">Подробнее</a></p><div class="ckb__b"><button type="button" data-v="necessary">Только необходимые</button><button type="button" data-v="all">Принять</button></div>';
+b.addEventListener('click',function(e){var v=e.target.getAttribute&&e.target.getAttribute('data-v');if(!v)return;try{localStorage.setItem(K,v)}catch(x){}try{document.dispatchEvent(new CustomEvent('cookie-choice',{detail:v}))}catch(x){}b.remove()});
+document.body.appendChild(b)})();
+</script>
+<!-- legal-add -->
 </body>
 </html>
